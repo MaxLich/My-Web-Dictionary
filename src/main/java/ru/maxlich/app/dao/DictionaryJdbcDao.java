@@ -20,10 +20,10 @@ public class DictionaryJdbcDao implements DictionaryDao {
     }
 
     @Override
-    public Long add(DictionaryRecord addingEntity) {
+    public Long add(DictionaryRecord addingRecord) {
         String sql = "INSERT INTO dictionary(word, definition) VALUES (?, ?)";
-        int addedRowCount = jdbcTemplate.update(sql, addingEntity.getWord(), addingEntity.getDefinition());
-        DictionaryRecord dictRecord = getByName(addingEntity.getWord());
+        int addedRowCount = jdbcTemplate.update(sql, addingRecord.getWord(), addingRecord.getDefinition());
+        DictionaryRecord dictRecord = getByName(addingRecord.getWord());
         if (addedRowCount <= 0 || dictRecord == null)
             return null;
 

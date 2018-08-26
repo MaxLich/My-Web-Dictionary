@@ -2,7 +2,7 @@ package ru.maxlich.app.service;
 
 import java.util.List;
 
-public interface IStorageService<I, E> {
+public interface StorageService<I, E> {
     I add(E newEntity);
     E update(E updatedEntity);
 

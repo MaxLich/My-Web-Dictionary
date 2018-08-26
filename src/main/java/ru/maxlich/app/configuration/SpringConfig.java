@@ -19,7 +19,7 @@ public class SpringConfig {
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/dictionary_db");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/dictionary_db?currentSchema=dict");
         dataSource.setUsername("postgres");
         dataSource.setPassword("1");
         dataSource.setDriverClassName("org.postgresql.Driver");

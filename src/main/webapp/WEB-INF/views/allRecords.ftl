@@ -13,6 +13,8 @@
     <li><u>${record.word}</u> - ${record.definition}</li>
 </#list>
 </ul>
+<br>
+<a href="/my-web-dictionary/">Back</a>
 
 </body>
 </html>
