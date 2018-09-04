@@ -1,6 +1,7 @@
 package ru.maxlich.app.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.maxlich.app.entity.DictionaryRecord;
@@ -55,7 +56,11 @@ public class DictionaryJdbcDao implements DictionaryDao {
     @Override
     public DictionaryRecord getByName(String word) {
         String sql = "SELECT * FROM dictionary WHERE word = ?";
-        DictionaryRecord dictRecord = jdbcTemplate.queryForObject(sql, new Object[]{word}, rowMapper);
+        DictionaryRecord dictRecord = null;
+        try {
+            dictRecord = jdbcTemplate.queryForObject(sql, new Object[]{word}, rowMapper);
+        } catch (DataAccessException ignore) {}
+
         return dictRecord;
     }
 

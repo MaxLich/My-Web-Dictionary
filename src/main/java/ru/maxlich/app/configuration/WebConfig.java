@@ -3,11 +3,14 @@ package ru.maxlich.app.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
+
+import javax.servlet.Filter;
 
 @Configuration
 @EnableWebMvc
@@ -29,5 +32,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         freeMarkerConfigurer.setTemplateLoaderPaths("/", "/WEB-INF/views/");
         freeMarkerConfigurer.setDefaultEncoding("UTF-8");
         return freeMarkerConfigurer;
+    }
+
+    @Bean(name = "characterEncodingFilter")
+    public Filter characterEncodingFilter() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+        return characterEncodingFilter;
     }
 }

@@ -1,7 +1,5 @@
 package ru.maxlich.app.dao;
 
-import ru.maxlich.app.entity.DictionaryRecord;
-
 import java.util.List;
 
 public interface CommonDao<I, E> {
