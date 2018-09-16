@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Список слов, у которых нужно изменить значение</title>
+    <title>Выбор слова, которое надо удалить</title>
 </head>
 <body>
 
-<h1>Все слова из словаря:</h1>
+<h1>Выберете слово, которое надо удалить из словаря:</h1>
 
 <ul>
     <#list recordList as record>
-        <li><a href="/my-web-dictionary/dictionary-change-definition-of-word/${record.id}">${record.word}</a></li>
+        <li><a href="/my-web-dictionary/dictionary-delete-word/${record.id}">${record.word}</a></li>
     </#list>
 </ul>
 

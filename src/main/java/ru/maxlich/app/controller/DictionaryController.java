@@ -96,10 +96,27 @@ public class DictionaryController {
         return "redirect:/";
     }
 
-
-    @GetMapping("/dictionary-delete-word/")
-    public String deleteWord(Model model) {
-        model.addAttribute("");
-        return "allRecords";
+    @GetMapping("/dictionary-delete-word")
+    public String wordsToDeletePage(Model model) {
+        List<DictionaryRecord> recordList = dictionaryService.getAll();
+        recordList.forEach(record -> {
+            String word = record.getWord();
+            record.setWord(word.substring(0,1).toUpperCase() + word.substring(1));
+        });
+        model.addAttribute("recordList", recordList);
+        return "wordsToDelete";
     }
+
+    @GetMapping("/dictionary-delete-word/{recordId}")
+    public String deleteWordPage(@PathVariable("recordId") Long recordId, Model model) {
+        model.addAttribute("record", dictionaryService.getById(recordId));
+        return "deleteWord";
+    }
+
+    @PostMapping("/dictionary-delete-word")
+    public String deleteWord(@ModelAttribute("record") DictionaryRecord record) {
+        dictionaryService.remove(record);
+        return "redirect:/";
+    }
+
 }

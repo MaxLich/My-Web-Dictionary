@@ -43,13 +43,19 @@ public class DictionaryJdbcDao implements DictionaryDao {
     }
 
     @Override
-    public void remove(DictionaryRecord removingEntity) {
-
+    public void remove(DictionaryRecord removingRecord) {
+        String sql = "DELETE FROM dictionary WHERE word = ?";
+        int deletedRowCount = jdbcTemplate.update(sql, removingRecord.getWord());
+        if (deletedRowCount <= 0)
+            System.out.println("Nothing was deleted");
     }
 
     @Override
     public void removeAll() {
-
+        String sql = "DELETE FROM dictionary";
+        int deletedRowCount = jdbcTemplate.update(sql);
+        if (deletedRowCount <= 0)
+            System.out.println("Nothing was deleted");
     }
 
     @Override
@@ -89,6 +95,8 @@ public class DictionaryJdbcDao implements DictionaryDao {
 
     @Override
     public Long getCount() {
-        return null;
+        String sql = "SELECT count() FROM dictionary";
+        Long count = jdbcTemplate.queryForObject(sql, Long.class);
+        return count;
     }
 }
