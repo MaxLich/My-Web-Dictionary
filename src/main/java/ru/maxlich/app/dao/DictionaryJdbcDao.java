@@ -32,8 +32,14 @@ public class DictionaryJdbcDao implements DictionaryDao {
     }
 
     @Override
-    public DictionaryRecord update(DictionaryRecord updatedEntity) {
-        return null;
+    public DictionaryRecord update(DictionaryRecord updatedRecord) {
+        String sql = "UPDATE dictionary SET definition = ? WHERE word = ?";
+        int addedRowCount = jdbcTemplate.update(sql, updatedRecord.getDefinition(), updatedRecord.getWord());
+        DictionaryRecord dictRecord = getByName(updatedRecord.getWord());
+        if (addedRowCount <= 0)
+            return null;
+
+        return dictRecord;
     }
 
     @Override
@@ -59,6 +65,17 @@ public class DictionaryJdbcDao implements DictionaryDao {
         DictionaryRecord dictRecord = null;
         try {
             dictRecord = jdbcTemplate.queryForObject(sql, new Object[]{word}, rowMapper);
+        } catch (DataAccessException ignore) {}
+
+        return dictRecord;
+    }
+
+    @Override
+    public DictionaryRecord getByDefinition(String definition) {
+        String sql = "SELECT * FROM dictionary WHERE definition LIKE ?";
+        DictionaryRecord dictRecord = null;
+        try {
+            dictRecord = jdbcTemplate.queryForObject(sql, new Object[]{"%" + definition + "%"}, rowMapper);
         } catch (DataAccessException ignore) {}
 
         return dictRecord;

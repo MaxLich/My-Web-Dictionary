@@ -7,7 +7,7 @@
 <body>
 
 <h1>Добавление нового слова</h1>
-<form name="record" action="/my-web-dictionary/dictionary-add-word/" method="post" accept-charset="UTF-8">
+<form name="record" action="/my-web-dictionary/dictionary-add-word" method="post" accept-charset="UTF-8">
     Слово:<br>
     <input title="Слово" type="text" name="word" style="width: 418px;"><br>
     Значение:<br>

@@ -53,6 +53,12 @@ public class DictionaryServiceImpl implements DictionaryService {
 
     @Transactional(readOnly = true)
     @Override
+    public DictionaryRecord getByDefinition(String definition) {
+        return dictionaryDao.getByDefinition(definition);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
     public List<DictionaryRecord> getAll() {
         return dictionaryDao.getAll();
     }
