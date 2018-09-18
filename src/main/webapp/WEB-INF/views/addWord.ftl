@@ -12,7 +12,7 @@
     <input title="Слово" type="text" name="word" style="width: 418px;"><br>
     Значение:<br>
     <textarea title="Значение слова" rows="10" cols="50" name="definition"></textarea><br>
-    <input type="submit" value="OK">
+    <input type="submit" value="Добавить">
 </form>
 
 <br>

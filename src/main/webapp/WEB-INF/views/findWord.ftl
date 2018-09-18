@@ -14,10 +14,12 @@
 <#if record??>
 <p><u>${record.word}</u> - ${record.definition}</p>
 </#if>
+
 <!-- вывод сообщения, если слово не найдено -->
 <#if error??>
 <p>${error}</p>
 </#if>
+
 <br>
 <a href="/my-web-dictionary/">Back</a>
 
