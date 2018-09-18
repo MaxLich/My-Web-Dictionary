@@ -4,6 +4,10 @@
     <title>Словарь</title></head>
 <body>
 <h1><span lang="ru">Словарь</span></h1>
+
+<#if message??>
+<p>${message.text}</p>
+</#if>
 <#--show message here-->
 <h4><span lang="ru">Выберете действие:</span></h4>
 <ol>

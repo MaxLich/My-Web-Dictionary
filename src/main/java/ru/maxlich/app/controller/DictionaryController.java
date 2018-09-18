@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.maxlich.app.entity.DictionaryRecord;
+import ru.maxlich.app.entity.Message;
 import ru.maxlich.app.service.DictionaryService;
 
 import java.util.List;
@@ -37,8 +39,9 @@ public class DictionaryController {
     }
 
     @PostMapping("/dictionary-add-word")
-    public String addWord(@ModelAttribute("record") DictionaryRecord record) {
+    public String addWord(@ModelAttribute("record") DictionaryRecord record, RedirectAttributes redirectAttributes) {
         dictionaryService.add(record);
+        redirectAttributes.addFlashAttribute("message", new Message("Слово \"" + record.getWord() + "\" было успешно добавлено в словарь."));
         return "redirect:/";
     }
 
@@ -91,8 +94,9 @@ public class DictionaryController {
     }
 
     @PostMapping("/dictionary-change-definition-of-word")
-    public String changeDefinitionOfWord(@ModelAttribute("record") DictionaryRecord record) {
+    public String changeDefinitionOfWord(@ModelAttribute("record") DictionaryRecord record, RedirectAttributes redirectAttributes) {
         dictionaryService.update(record);
+        redirectAttributes.addFlashAttribute("message", new Message("Значение слова \"" + record.getWord() + "\" было успешно изменено."));
         return "redirect:/";
     }
 
@@ -114,8 +118,9 @@ public class DictionaryController {
     }
 
     @PostMapping("/dictionary-delete-word")
-    public String deleteWord(@ModelAttribute("record") DictionaryRecord record) {
+    public String deleteWord(@ModelAttribute("record") DictionaryRecord record, RedirectAttributes redirectAttributes) {
         dictionaryService.remove(record);
+        redirectAttributes.addFlashAttribute("message", new Message("Слово \"" + record.getWord() + "\" было успешно удалено из словаря."));
         return "redirect:/";
     }
 
